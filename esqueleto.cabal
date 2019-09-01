@@ -26,25 +26,39 @@ source-repository head
   type: git
   location: git://github.com/bitemyapp/esqueleto.git
 
+flag eta
+  default: True
+  manual: True
+  description: Build for eta
+
 library
   exposed-modules:
       Database.Esqueleto
       Database.Esqueleto.Internal.Language
       Database.Esqueleto.Internal.Sql
-      Database.Esqueleto.MySQL
-      Database.Esqueleto.PostgreSQL
-      Database.Esqueleto.PostgreSQL.JSON
-      Database.Esqueleto.SQLite
+
+  if !flag(eta)
+      exposed-modules:
+          Database.Esqueleto.MySQL
+          Database.Esqueleto.PostgreSQL
+          Database.Esqueleto.PostgreSQL.JSON
+          Database.Esqueleto.SQLite
+
   other-modules:
       Database.Esqueleto.Internal.Internal
       Database.Esqueleto.Internal.PersistentImport
-      Database.Esqueleto.PostgreSQL.JSON.Instances
       Paths_esqueleto
+
+  if !flag(eta)
+     other-modules:
+         Database.Esqueleto.PostgreSQL.JSON.Instances
+
   hs-source-dirs:
       src/
+
   build-depends:
       base >=4.8 && <5.0
-    , aeson >=1.0
+    , aeson >= 0.11.3.0 && <0.11.3.1
     , blaze-html
     , bytestring
     , conduit >=1.3
@@ -53,10 +67,11 @@ library
     , resourcet >=1.2
     , tagged >=0.2
     , text >=0.11 && <1.3
-    , time >=1.5.0.1 && <=1.8.0.2
+    , time >=1.8.0.3 && <=1.8.0.4
     , transformers >=0.2
     , unliftio
     , unordered-containers >=0.2
+    , typed-process >= 0.2.2.0 && <0.2.2.1
   if impl(ghc >=8.0)
     ghc-options: -Wall -Wno-redundant-constraints
   else
@@ -90,10 +105,11 @@ test-suite mysql
     , resourcet >=1.2
     , tagged >=0.2
     , text >=0.11 && <1.3
-    , time >=1.5.0.1 && <=1.8.0.2
+    , time >=1.8.0.3 && <=1.8.0.4
     , transformers >=0.2
     , unliftio
     , unordered-containers >=0.2
+    , directory >=1.3.1.0 && <1.3.1.1
   default-language: Haskell2010
 
 test-suite postgresql
@@ -108,7 +124,7 @@ test-suite postgresql
   ghc-options: -Wall
   build-depends:
       base >=4.8 && <5.0
-    , aeson
+    , aeson >= 0.11.3.0 && <0.11.3.1
     , blaze-html
     , bytestring
     , conduit >=1.3
@@ -125,7 +141,7 @@ test-suite postgresql
     , resourcet >=1.2
     , tagged >=0.2
     , text >=0.11 && <1.3
-    , time >=1.5.0.1 && <=1.8.0.2
+    , time >=1.8.0.3 && <=1.8.0.4
     , transformers >=0.2
     , unliftio
     , unordered-containers >=0.2
@@ -152,13 +168,16 @@ test-suite sqlite
     , hspec
     , monad-logger
     , persistent >=2.8.0 && <2.11
-    , persistent-sqlite
     , persistent-template
     , resourcet >=1.2
     , tagged >=0.2
     , text >=0.11 && <1.3
-    , time >=1.5.0.1 && <=1.8.0.2
+    , time >=1.8.0.3 && <=1.8.0.4
     , transformers >=0.2
     , unliftio
     , unordered-containers >=0.2
   default-language: Haskell2010
+
+  if flag(eta)
+    build-depends:
+        persistent-sqlite
