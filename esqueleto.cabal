@@ -58,7 +58,7 @@ library
 
   build-depends:
       base >=4.8 && <5.0
-    , aeson >= 0.11.3.0 && <0.11.3.1
+    , aeson >= 1.2.4.0 && <1.2.4.1
     , blaze-html
     , bytestring
     , conduit >=1.3
@@ -124,7 +124,7 @@ test-suite postgresql
   ghc-options: -Wall
   build-depends:
       base >=4.8 && <5.0
-    , aeson >= 0.11.3.0 && <0.11.3.1
+    , aeson >= 1.2.4.0 && <1.2.4.1
     , blaze-html
     , bytestring
     , conduit >=1.3
@@ -134,10 +134,7 @@ test-suite postgresql
     , hspec
     , monad-logger
     , persistent >=2.10.0 && <2.11
-    , persistent-postgresql >= 2.10.0 && <2.11
     , persistent-template
-    , postgresql-libpq
-    , postgresql-simple
     , resourcet >=1.2
     , tagged >=0.2
     , text >=0.11 && <1.3
