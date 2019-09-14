@@ -23,6 +23,11 @@ source-repository-package
   location: git://github.com/prozacchiwawa/haskell-src-meta.git
   branch: only-haskell-src-meta
 
+source-repository-package
+  type: git
+  location: git://github.com/prozacchiwawa/conduit.git
+  branch: eta-only-conduit-extra
+
 packages: .
   persistent/persistent
   persistent/persistent-template

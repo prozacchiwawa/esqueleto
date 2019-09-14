@@ -61,16 +61,16 @@ library
     , aeson >= 1.2.4.0 && <1.2.4.1
     , blaze-html
     , bytestring
-    , conduit >=1.3
+    , conduit >=1.3.0.3 && <1.3.0.4
     , monad-logger
-    , persistent >=2.10.0 && <2.11
+    , persistent
     , resourcet
-    , tagged >=0.2
-    , text >=0.11 && <1.3
-    , time >=1.8.0.3 && <=1.8.0.4
-    , transformers >=0.2
+    , tagged
+    , text
+    , time
+    , transformers
     , unliftio
-    , unordered-containers >=0.2
+    , unordered-containers
     , typed-process >= 0.2.2.0 && <0.2.2.1
   if impl(ghc >=8.0)
     ghc-options: -Wall -Wno-redundant-constraints
